@@ -1,0 +1,27 @@
+# Ambiente virtual
+.venv/
+venv/
+ENV/
+
+# Buildozer e Flet caches / builds locais
+.buildozer/
+build/
+bin/
+*.apk
+*.aab
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Configurações do PyCharm / IDEs
+.idea/
+.vscode/
+*.iml
+
+#arquivos de teste local
+cred_local.json
+historico_baixas.json
+app_prefs.json
+cred_ofs.json
+main.py
