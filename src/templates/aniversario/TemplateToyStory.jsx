@@ -9,8 +9,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
   const [erro, setErro] = useState('');
   const [tempoRestante, setTempoRestante] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
   
-  // Estado para armazenar as URLs das fotos da galeria dinamicamente
+  // Estados para armazenar fotos e vídeos dinâmicos do storage
   const [fotosGaleria, setFotosGaleria] = useState([]);
+  const [videosEvento, setVideosEvento] = useState([]);
 
   const dataEvento = evento?.data_evento ? new Date(evento.data_evento) : new Date('2027-01-17T15:00:00');
 
@@ -47,48 +48,72 @@ export default function TemplateToyStory({ slug, eventoData }) {
     }
   }, [slug, evento]);
 
-  // Carregar fotos automaticamente do Supabase Storage considerando a subpasta 'galeria'
+  // Carregar fotos e vídeos automaticamente do Supabase Storage
   useEffect(() => {
-    async function buscarFotosGaleria() {
+    async function buscarMidiasStorage() {
       const pastaBucket = evento?.pasta_storage || 'ravi-um-aninho';
       const caminhoGaleria = `${pastaBucket}/galeria`;
+      const caminhoVideos = `${pastaBucket}/videos`;
 
       try {
-        const { data, error } = await supabase.storage
+        // 1. Buscar fotos da galeria
+        const { data: dadosFotos, error: erroFotos } = await supabase.storage
           .from('Resources')
           .list(caminhoGaleria, {
             limit: 20,
             sortBy: { column: 'name', order: 'asc' }
           });
 
-        if (error) throw error;
-
-        if (data) {
-          const urls = data
+        if (!erroFotos && dadosFotos) {
+          const urlsFotos = dadosFotos
             .filter(item => {
               if (!item.name || item.name.startsWith('.')) return false;
-              const nomeLower = item.name.toLowerCase();
-              return nomeLower.endsWith('.jpg') || nomeLower.endsWith('.jpeg') || nomeLower.endsWith('.png') || nomeLower.endsWith('.webp');
+              const ext = item.name.toLowerCase();
+              return ext.endsWith('.jpg') || ext.endsWith('.jpeg') || ext.endsWith('.png') || ext.endsWith('.webp');
             })
             .slice(0, 9)
             .map(item => {
-              const caminhoCompleto = `${caminhoGaleria}/${item.name}`;
               const { data: publicUrlData } = supabase.storage
                 .from('Resources')
-                .getPublicUrl(caminhoCompleto);
-                
+                .getPublicUrl(`${caminhoGaleria}/${item.name}`);
               return publicUrlData.publicUrl;
             });
 
-          setFotosGaleria(urls);
+          setFotosGaleria(urlsFotos);
         }
+
+        // 2. Buscar vídeos da pasta 'videos'
+        const { data: dadosVideos, error: erroVideos } = await supabase.storage
+          .from('Resources')
+          .list(caminhoVideos, {
+            limit: 10,
+            sortBy: { column: 'name', order: 'asc' }
+          });
+
+        if (!erroVideos && dadosVideos) {
+          const urlsVideos = dadosVideos
+            .filter(item => {
+              if (!item.name || item.name.startsWith('.')) return false;
+              const ext = item.name.toLowerCase();
+              return ext.endsWith('.mp4') || ext.endsWith('.webm') || ext.endsWith('.mov');
+            })
+            .map(item => {
+              const { data: publicUrlData } = supabase.storage
+                .from('Resources')
+                .getPublicUrl(`${caminhoVideos}/${item.name}`);
+              return publicUrlData.publicUrl;
+            });
+
+          setVideosEvento(urlsVideos);
+        }
+
       } catch (err) {
-        console.error('Erro ao carregar galeria de fotos:', err);
+        console.error('Erro ao carregar mídias do storage:', err);
       }
     }
 
     if (evento) {
-      buscarFotosGaleria();
+      buscarMidiasStorage();
     }
   }, [evento]);
   
@@ -148,8 +173,6 @@ export default function TemplateToyStory({ slug, eventoData }) {
   const fotoAniversarianteUrl = evento.foto_url || "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop";
   
   const woodyUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/Toy-story/IMG-20260910-WA0013.jpg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvVG95LXN0b3J5L0lNRy0yMDI2MDkxMC1XQTAwMTMuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA1ODU4NSwiZXhwIjo0OTQyNjU4NTg1fQ.HlS9z1vvmOjnInRbYvLwhYrmFcoyOE0jpqDn77QrKMY";
-
-  // Altere para a URL correta da imagem do Buzz após subir para o Supabase
   const buzzUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/public/Resources/Toy-story/difarac-169f36df-27f4-42cd-98f7-5982f89b8668-removebg-preview.png"; 
 
   return (
@@ -186,7 +209,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
       <div className="max-w-xl w-full relative z-10 px-4 pt-10 pb-16">
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400 relative">
 
-          {/* FIGURINHA DO WOODY COM TRATAMENTO DE COR PARA SUMIR O FUNDO PRETO */}
+          {/* FIGURINHA DO WOODY */}
           <div className="flex justify-center mb-6">
             <div className="bg-sky-950 p-3 rounded-2xl shadow-lg border-2 border-amber-400 transform -rotate-2 w-36 md:w-44 flex flex-col items-center">
               <img 
@@ -200,7 +223,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           </div>
 
-          {/* TÍTULO DO LIVRO DE AVENTURAS */}
+          {/* TÍTULO */}
           <div className="my-2 flex flex-col items-center">
             <h1 className="text-5xl md:text-6xl font-black text-amber-300 uppercase tracking-wider drop-shadow-[0_4px_0_#1e3a8a] [-webkit-text-stroke:2px_#1e3a8a] transform -rotate-2">
               {evento.titulo}
@@ -212,7 +235,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
 
           <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
 
-          {/* ATO 1: BALÃO DE FALA */}
+          {/* MENSAGEM */}
           <div className="relative bg-sky-100 border-4 border-sky-400 rounded-3xl p-5 mb-8 text-left shadow-md">
             <div className="absolute -top-4 left-8 bg-amber-400 text-sky-950 text-xs font-black px-3 py-1 rounded-full border-2 border-sky-500 uppercase">
               🤠 Mensagem do Xerife
@@ -245,7 +268,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           </div>
 
-          {/* ATO 2: O DIÁRIO DOS PAIS */}
+          {/* DIÁRIO DOS PAIS */}
           <div className="mb-8 bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-300 text-left shadow-sm">
             <h3 className="text-xs font-black text-amber-800 uppercase tracking-wide mb-2">📖 Capítulo 1: O Primeiro Ano</h3>
             <p className="text-slate-700 text-sm leading-relaxed font-medium">
@@ -253,19 +276,23 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </p>
           </div>
 
-          {/* VÍDEO DA AVENTURA */}
-          {evento.video_url && (
-            <div className="mb-8 rounded-2xl overflow-hidden shadow-lg aspect-video bg-black border-2 border-sky-400 flex items-center justify-center">
-              <iframe 
-                src={evento.video_url} 
-                title="Vídeo do Aniversário" 
-                className="w-full h-full"
-                allowFullScreen 
-              />
+          {/* VÍDEOS DINÂMICOS DO STORAGE (Renderiza se houver vídeos na pasta /videos) */}
+          {videosEvento.length > 0 && (
+            <div className="mb-8 flex flex-col gap-4">
+              <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide text-center">🎬 Vídeos da Aventura</h3>
+              {videosEvento.map((videoUrl, index) => (
+                <div key={index} className="rounded-2xl overflow-hidden shadow-lg aspect-video bg-black border-2 border-sky-400 flex items-center justify-center">
+                  <video 
+                    src={videoUrl} 
+                    controls 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
             </div>
           )}
 
-          {/* ATO 3: QUADRINHO DE LOCALIZAÇÃO */}
+          {/* LOCALIZAÇÃO */}
           <div className="mb-8 bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-left shadow-sm">
             <h3 className="text-xs font-black text-red-600 uppercase tracking-wide mb-1">📍 Coordenadas da Base (Local)</h3>
             <p className="text-slate-800 font-bold mb-3">Salão de Festas Quarto do Andy - Rua dos Brinquedos, 1995</p>
@@ -279,7 +306,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </a>
           </div>
 
-          {/* ATO 4: ÁLBUM DE FIGURINHAS DINÂMICO */}
+          {/* ÁLBUM DE FIGURINHAS (FOTOS) */}
           {fotosGaleria.length > 0 && (
             <div className="mb-8 text-left bg-sky-50 p-4 rounded-2xl border-2 border-sky-300">
               <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide mb-3 text-center">📸 Álbum de Figurinhas do Herói</h3>
@@ -290,7 +317,6 @@ export default function TemplateToyStory({ slug, eventoData }) {
                       src={url} 
                       alt={`Momento ${index + 1}`} 
                       className="rounded-lg object-cover w-full h-full"
-                      onError={(e) => console.error("Erro ao carregar imagem da URL:", url)}
                     />
                   </div>
                 ))}
@@ -298,7 +324,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           )}
 
-          {/* FORMULÁRIO DE RSVP */}
+          {/* RSVP */}
           <div className="bg-sky-100 p-6 rounded-2xl border-2 border-sky-300 mb-8 shadow-sm">
             <h2 className="text-xl font-black mb-3 text-sky-950">Vai participar da brincadeira?</h2>
             {enviado ? (
@@ -325,7 +351,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             )}
           </div>
 
-          {/* FIGURINHA DO BUZZ LIGHTYEAR (ANTES DO PIX) */}
+          {/* FIGURINHA DO BUZZ */}
           <div className="flex justify-center mb-8">
             <div className="bg-slate-900 p-3 rounded-2xl shadow-lg border-2 border-purple-500 transform rotate-2 w-36 md:w-44 flex flex-col items-center">
               <img 
