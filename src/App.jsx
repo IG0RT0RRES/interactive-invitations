@@ -1,34 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // ou o seu roteador atual
+import { useParams } from 'react-router-dom';
 import { supabase } from './services/supabaseClient';
 
-// Importa os templates disponíveis
-import TemplateAniversario1 from './templates/aniversario/TemplateAniversario1';
-import TemplateToyStory from './templates/aniversario/TemplateToyStory';
+// Importe os dois templates
+import TemplateAniversario1 from './TemplateAniversario1';
+import TemplateToyStory from './TemplateToyStory';
 
 export default function VisualizadorConvite() {
   const { slug } = useParams();
   const [evento, setEvento] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState('');
 
   useEffect(() => {
-    async function carregarDados() {
-      const { data, error } = await supabase
-        .from('eventos')
-        .select('*')
-        .eq('slug', slug)
-        .single();
-      
-      if (!error) setEvento(data);
-      setLoading(false);
+    async function carregarEvento() {
+      try {
+        const { data, error } = await supabase
+          .from('eventos')
+          .select('*')
+          .eq('slug', slug)
+          .single();
+
+        if (error) throw error;
+        setEvento(data);
+      } catch (err) {
+        console.error('Erro ao carregar convite:', err);
+        setErro('Convite não encontrado.');
+      } finally {
+        setLoading(false);
+      }
     }
-    carregarDados();
+
+    if (slug) carregarEvento();
   }, [slug]);
 
-  if (loading) return <div>Carregando...</div>;
-  if (!evento) return <div>Convite não encontrado.</div>;
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-slate-400 bg-slate-900">Carregando...</div>;
+  }
 
-  // Lógica de escolha do template com base no que está salvo no banco
+  if (erro || !evento) {
+    return <div className="min-h-screen flex items-center justify-center text-red-400 bg-slate-900">{erro || "Convite não encontrado."}</div>;
+  }
+
+  // A Mágica Acontece Aqui: O sistema olha a coluna "template" do Supabase e escolhe o arquivo certo!
   switch (evento.template) {
     case 'toy-story':
       return <TemplateToyStory slug={slug} eventoData={evento} />;
