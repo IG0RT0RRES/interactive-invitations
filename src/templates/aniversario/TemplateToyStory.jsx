@@ -14,6 +14,16 @@ export default function TemplateToyStory({ slug, eventoData }) {
 
   const dataEvento = evento?.data_evento ? new Date(evento.data_evento) : new Date('2027-01-17T15:00:00');
 
+  // Atualiza dinamicamente o título da aba do navegador com base no evento
+  useEffect(() => {
+    if (evento) {
+      const temaFormatado = evento.tema ? evento.tema.charAt(0).toUpperCase() + evento.tema.slice(1).replace('-', ' ') : 'Convite';
+      const nomeCrianca = evento.nome_crianca || evento.titulo || 'Aniversário';
+      
+      document.title = `${temaFormatado} - ${nomeCrianca}`;
+    }
+  }, [evento]);
+
   useEffect(() => {
     if (!evento) {
       async function carregarEvento() {
