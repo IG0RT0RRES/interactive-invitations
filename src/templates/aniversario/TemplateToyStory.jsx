@@ -88,9 +88,12 @@ export default function TemplateToyStory({ slug, eventoData }) {
 
   const imagemCapaUrl = evento.capa_url || "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop";
   const fotoAniversarianteUrl = evento.foto_url || "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop";
+  
+  // URL do Woody fornecida
+  const woodyUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/Toy-story/IMG-20260910-WA0013.jpg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvVG95LXN0b3J5L0lNRy0yMDI2MDkxMC1XQTAwMTMuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA1ODU4NSwiZXhwIjo0OTQyNjU4NTg1fQ.HlS9z1vvmOjnInRbYvLwhYrmFcoyOE0jpqDn77QrKMY";
 
   return (
-    <div className="min-h-screen bg-sky-500 text-slate-900 flex flex-col items-center relative overflow-hidden">
+    <div className="min-h-screen bg-sky-500 text-slate-900 flex flex-col items-center relative overflow-x-hidden">
 
       {/* Efeito visual de nuvens no fundo */}
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#fff_2px,transparent_2px)] [background-size:24px_24px]"></div>
@@ -121,7 +124,17 @@ export default function TemplateToyStory({ slug, eventoData }) {
 
       {/* CORPO DA HISTÓRIA (PÁGINA DE AVENTURAS) */}
       <div className="max-w-xl w-full relative z-10 px-4 pt-10 pb-16">
-        <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400">
+        
+        {/* Woody Flutuando na Lateral Esquerda (Visível em Telas Médias/Grandes) */}
+        <div className="absolute -left-20 md:-left-36 top-32 z-20 hidden md:block pointer-events-none">
+          <img 
+            src={woodyUrl} 
+            alt="Xerife Woody" 
+            className="w-32 md:w-44 drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] transform -rotate-6"
+          />
+        </div>
+
+        <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400 relative">
 
           {/* TÍTULO DO LIVRO DE AVENTURAS */}
           <div className="my-2 flex flex-col items-center">
