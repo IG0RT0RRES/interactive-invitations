@@ -1,31 +1,38 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'; // ou o seu roteador atual
+import { supabase } from '../../services/supabaseClient';
+
+// Importa os templates disponíveis
 import TemplateAniversario1 from './templates/aniversario/TemplateAniversario1';
+import TemplateToyStory from './templates/aniversario/TemplateToyStory';
 
-function Home() {
-  return (
-    <div className="p-8 text-center">
-      <h1 className="text-3xl font-bold mb-4">Plataforma de Convites Digitais</h1>
-      <p className="text-gray-600 mb-4">Seja bem-vindo ao seu painel de controle e portfólio.</p>
-      <p className="text-sm text-purple-600 font-medium">
-        Para testar o convite do seu filho, acesse na barra de endereços: <code className="bg-gray-100 p-1 rounded">/convite/aniversario-do-lucas</code>
-      </p>
-    </div>
-  );
-}
-
-function PaginaConviteDinamico() {
+export default function VisualizadorConvite() {
   const { slug } = useParams();
-  return <TemplateAniversario1 slug={slug} />;
-}
+  const [evento, setEvento] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/convite/:slug" element={<PaginaConviteDinamico />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  useEffect(() => {
+    async function carregarDados() {
+      const { data, error } = await supabase
+        .from('eventos')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+      
+      if (!error) setEvento(data);
+      setLoading(false);
+    }
+    carregarDados();
+  }, [slug]);
+
+  if (loading) return <div>Carregando...</div>;
+  if (!evento) return <div>Convite não encontrado.</div>;
+
+  // Lógica de escolha do template com base no que está salvo no banco
+  switch (evento.template) {
+    case 'toy-story':
+      return <TemplateToyStory slug={slug} eventoData={evento} />;
+    default:
+      return <TemplateAniversario1 slug={slug} eventoData={evento} />;
+  }
 }
