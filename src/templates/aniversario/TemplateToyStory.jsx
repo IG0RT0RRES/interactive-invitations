@@ -37,33 +37,34 @@ export default function TemplateToyStory({ slug, eventoData }) {
     }
   }, [slug, evento]);
 
-  // Carregar fotos automaticamente do Supabase Storage corrigindo o caminho e filtrando lixo
+  // Carregar fotos automaticamente do Supabase Storage considerando a subpasta 'galeria'
   useEffect(() => {
     async function buscarFotosGaleria() {
+      // Define o caminho completo até a pasta de fotos
       const pastaBucket = evento?.pasta_storage || 'ravi-um-aninho';
+      const caminhoGaleria = `${pastaBucket}/galeria`;
 
       try {
         const { data, error } = await supabase.storage
           .from('Resources')
-          .list(pastaBucket, {
-            limit: 20, // Busca um pouco mais para garantir que pegue imagens após filtrar o lixo
+          .list(caminhoGaleria, {
+            limit: 20,
             sortBy: { column: 'name', order: 'asc' }
           });
 
         if (error) throw error;
 
         if (data) {
-          // Filtra arquivos válidos e remove placeholders de pastas vazias
           const urls = data
             .filter(item => {
               if (!item.name || item.name.startsWith('.')) return false;
               const nomeLower = item.name.toLowerCase();
               return nomeLower.endsWith('.jpg') || nomeLower.endsWith('.jpeg') || nomeLower.endsWith('.png') || nomeLower.endsWith('.webp');
             })
-            .slice(0, 9) // Limita a no máximo 9 fotos
+            .slice(0, 9)
             .map(item => {
-              // Monta o caminho completo correto: pasta/nome_do_arquivo
-              const caminhoCompleto = `${pastaBucket}/${item.name}`;
+              // Monta a URL pública apontando para a subpasta galeria
+              const caminhoCompleto = `${caminhoGaleria}/${item.name}`;
               const { data: publicUrlData } = supabase.storage
                 .from('Resources')
                 .getPublicUrl(caminhoCompleto);
