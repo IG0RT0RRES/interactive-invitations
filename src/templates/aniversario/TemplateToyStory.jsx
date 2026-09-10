@@ -223,28 +223,28 @@ export default function TemplateToyStory({ slug, eventoData }) {
             <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide mb-3 text-center">📸 Álbum de Figurinhas do Herói</h3>
             <div className="grid grid-cols-3 gap-2">
               <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 1" className="rounded-lg object-cover h-24 w-full" />
-              </div>
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform rotate-1">
-                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=300&auto=format&fit=crop" alt="Momento 2" className="rounded-lg object-cover h-24 w-full" />
+                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
               </div>
               <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
               </div>
               <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
               </div>
               <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
               </div>
               <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
               </div>
               <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
               </div>
               <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+              </div>
+              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
+                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
               </div>
               <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
                 <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
