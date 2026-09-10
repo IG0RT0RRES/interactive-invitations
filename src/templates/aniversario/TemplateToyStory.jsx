@@ -95,14 +95,14 @@ export default function TemplateToyStory({ slug, eventoData }) {
       {/* Efeito visual de nuvens no fundo */}
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#fff_2px,transparent_2px)] [background-size:24px_24px]"></div>
 
-      {/* Bloco da Capa */}
+      {/* BLOCO 1: CAPA COM O TÍTULO ESTILO TOY STORY */}
       <div className="w-full h-80 md:h-96 relative bg-sky-600 overflow-hidden flex items-end justify-center shadow-md">
         <img 
           src={imagemCapaUrl} 
           alt="Capa Toy Story"
-          className="absolute inset-0 w-full h-full object-cover opacity-80"
+          className="absolute inset-0 w-full h-full object-cover opacity-85"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-sky-950/80 via-sky-900/30 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-sky-950/90 via-sky-900/40 to-transparent"></div>
 
         {/* Foto do Aniversariante Flutuando */}
         <div className="relative z-10 -mb-6 flex flex-col items-center">
@@ -119,18 +119,15 @@ export default function TemplateToyStory({ slug, eventoData }) {
         </div>
       </div>
 
-      {/* Card Principal de Conteúdo */}
+      {/* CORPO DA HISTÓRIA (PÁGINA DE AVENTURAS) */}
       <div className="max-w-xl w-full relative z-10 px-4 pt-10 pb-16">
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400">
 
-          {/* TÍTULO ESTILO TOY STORY (ARTHUR / RAVI) */}
+          {/* TÍTULO DO LIVRO DE AVENTURAS */}
           <div className="my-2 flex flex-col items-center">
-            {/* Nome grande amarelo com contorno pesado */}
             <h1 className="text-5xl md:text-6xl font-black text-amber-300 uppercase tracking-wider drop-shadow-[0_4px_0_#1e3a8a] [-webkit-text-stroke:2px_#1e3a8a] transform -rotate-2">
               {evento.titulo}
             </h1>
-            
-            {/* Faixa vermelha com o subtítulo */}
             <div className="bg-red-600 text-yellow-300 text-base md:text-lg font-black px-6 py-1.5 rounded-xl uppercase tracking-widest shadow-lg border-2 border-amber-300 transform rotate-1 -mt-2">
               FAZ 1 ANO
             </div>
@@ -138,40 +135,48 @@ export default function TemplateToyStory({ slug, eventoData }) {
 
           <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
 
-          {/* Mensagem Temática */}
-          <div className="bg-sky-50 p-4 rounded-2xl border-2 border-dashed border-sky-300 mb-6 text-sm text-sky-900 font-medium italic">
-            "Você tem um amigo em mim! Venha comemorar conosco essa grande aventura de 1 aninho!"
-          </div>
-
-          {/* Contagem Regressiva */}
-          <div className="grid grid-cols-4 gap-2 mb-8 bg-sky-950 text-white p-4 rounded-2xl border-2 border-amber-400 shadow-inner">
-            <div className="flex flex-col items-center">
-              <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.dias}</span>
-              <span className="text-[10px] uppercase font-bold text-sky-200">Dias</span>
+          {/* ATO 1: BALÃO DE FALA DO WOODY (ESTILO HQ) */}
+          <div className="relative bg-sky-100 border-4 border-sky-400 rounded-3xl p-5 mb-8 text-left shadow-md">
+            <div className="absolute -top-4 left-8 bg-amber-400 text-sky-950 text-xs font-black px-3 py-1 rounded-full border-2 border-sky-500 uppercase">
+              🤠 Mensagem do Xerife
             </div>
-            <div className="flex flex-col items-center">
-              <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.horas}</span>
-              <span className="text-[10px] uppercase font-bold text-sky-200">Horas</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.minutos}</span>
-              <span className="text-[10px] uppercase font-bold text-sky-200">Min</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.segundos}</span>
-              <span className="text-[10px] uppercase font-bold text-sky-200">Seg</span>
-            </div>
-          </div>
-
-          {/* Mensagem dos Pais */}
-          <div className="mb-8 bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-300 text-left shadow-sm">
-            <h3 className="text-xs font-black text-amber-800 uppercase tracking-wide mb-2">💌 Recado dos Pais</h3>
-            <p className="text-slate-700 text-sm leading-relaxed font-medium">
-              "Estamos preparando tudo com muito amor e carinho para celebrar o primeiro ano do nosso pequeno herói junto com as pessoas mais especiais das nossas vidas. Preparem suas fantasias e venham se divertir!"
+            <p className="text-sky-950 font-bold text-sm md:text-base mt-2 italic">
+              "Você tem um amigo em mim! O nosso comandante mirim completou 1 aninho de pura alegria e a nossa caixa de brinquedos inteira está convocada para essa missão épica!"
             </p>
           </div>
 
-          {/* Bloco de Vídeo */}
+          {/* CONTAGEM REGRESSIVA (PAINEL DE CONTROLE DO BUZZ) */}
+          <div className="mb-8">
+            <h3 className="text-xs font-black text-red-600 uppercase tracking-widest mb-2">⏱️ Lançamento Foguete em:</h3>
+            <div className="grid grid-cols-4 gap-2 bg-sky-950 text-white p-4 rounded-2xl border-2 border-amber-400 shadow-inner">
+              <div className="flex flex-col items-center">
+                <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.dias}</span>
+                <span className="text-[10px] uppercase font-bold text-sky-200">Dias</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.horas}</span>
+                <span className="text-[10px] uppercase font-bold text-sky-200">Horas</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.minutos}</span>
+                <span className="text-[10px] uppercase font-bold text-sky-200">Min</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.segundos}</span>
+                <span className="text-[10px] uppercase font-bold text-sky-200">Seg</span>
+              </div>
+            </div>
+          </div>
+
+          {/* ATO 2: O DIÁRIO DOS PAIS */}
+          <div className="mb-8 bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-300 text-left shadow-sm">
+            <h3 className="text-xs font-black text-amber-800 uppercase tracking-wide mb-2">📖 Capítulo 1: O Primeiro Ano</h3>
+            <p className="text-slate-700 text-sm leading-relaxed font-medium">
+              "Parece que foi ontem que voamos para a paternidade. Cada sorriso, cada passinho e cada descoberta tornaram os nossos dias uma verdadeira aventura digna de cinema. Venham celebrar com a gente!"
+            </p>
+          </div>
+
+          {/* VÍDEO DA AVENTURA */}
           {evento.video_url && (
             <div className="mb-8 rounded-2xl overflow-hidden shadow-lg aspect-video bg-black border-2 border-sky-400 flex items-center justify-center">
               <iframe 
@@ -183,9 +188,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           )}
 
-          {/* Localização da Festa */}
+          {/* ATO 3: QUADRINHO DE LOCALIZAÇÃO */}
           <div className="mb-8 bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-left shadow-sm">
-            <h3 className="text-xs font-black text-red-600 uppercase tracking-wide mb-1">📍 Local da Missão</h3>
+            <h3 className="text-xs font-black text-red-600 uppercase tracking-wide mb-1">📍 Coordenadas da Base (Local)</h3>
             <p className="text-slate-800 font-bold mb-3">Salão de Festas Quarto do Andy - Rua dos Brinquedos, 1995</p>
             <a 
               href="https://maps.google.com" 
@@ -197,7 +202,23 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </a>
           </div>
 
-          {/* Formulário de RSVP */}
+          {/* ATO 4: GALERIA DE FOTOS (ÁLBUM DE ADESIVOS) */}
+          <div className="mb-8 text-left bg-sky-50 p-4 rounded-2xl border-2 border-sky-300">
+            <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide mb-3 text-center">📸 Álbum de Figurinhas do Herói</h3>
+            <div className="grid grid-cols-3 gap-2">
+              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 1" className="rounded-lg object-cover h-24 w-full" />
+              </div>
+              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform rotate-1">
+                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=300&auto=format&fit=crop" alt="Momento 2" className="rounded-lg object-cover h-24 w-full" />
+              </div>
+              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+              </div>
+            </div>
+          </div>
+
+          {/* FORMULÁRIO DE RSVP (CONFIRMAÇÃO DE MISSÃO) */}
           <div className="bg-sky-100 p-6 rounded-2xl border-2 border-sky-300 mb-8 shadow-sm">
             <h2 className="text-xl font-black mb-3 text-sky-950">Vai participar da brincadeira?</h2>
             {enviado ? (
@@ -224,7 +245,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             )}
           </div>
 
-          {/* Área de Presentes / Pix */}
+          {/* CAIXA DE TESOUROS (PIX) */}
           {evento.chave_pix && (
             <div className="border-t-2 border-slate-200 pt-6">
               <h2 className="text-lg font-black mb-2 text-sky-950">Caixa de Tesouros (Pix)</h2>
