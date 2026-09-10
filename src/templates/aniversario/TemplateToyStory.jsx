@@ -194,7 +194,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             <h1 className="text-5xl md:text-6xl font-black text-amber-300 uppercase tracking-wider drop-shadow-[0_4px_0_#1e3a8a] [-webkit-text-stroke:2px_#1e3a8a] transform -rotate-2">
               {evento.titulo}
             </h1>
-            <div className="bg-red-600 text-yellow-300 text-base md:text-lg font-black px-6 py-1.5 rounded-xl uppercase tracking-widest shadow-lg border-2 border-amber-300 transform rotate-1 -mt-2">
+            <div className="bg-red-600 text-yellow-300 text-base md:text-lg font-black px-6 py-1.5 rounded-xl uppercase tracking-widest shadow-lg border-2 border-amber-300 transform rotate-1 mt-3">
               FAZ 1 ANO
             </div>
           </div>
