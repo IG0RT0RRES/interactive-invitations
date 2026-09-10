@@ -89,7 +89,6 @@ export default function TemplateToyStory({ slug, eventoData }) {
   const imagemCapaUrl = evento.capa_url || "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop";
   const fotoAniversarianteUrl = evento.foto_url || "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop";
   
-  // URL do Woody fornecida
   const woodyUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/Toy-story/IMG-20260910-WA0013.jpg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvVG95LXN0b3J5L0lNRy0yMDI2MDkxMC1XQTAwMTMuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA1ODU4NSwiZXhwIjo0OTQyNjU4NTg1fQ.HlS9z1vvmOjnInRbYvLwhYrmFcoyOE0jpqDn77QrKMY";
 
   return (
@@ -98,7 +97,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
       {/* Efeito visual de nuvens no fundo */}
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#fff_2px,transparent_2px)] [background-size:24px_24px]"></div>
 
-      {/* BLOCO 1: CAPA COM O TÍTULO ESTILO TOY STORY */}
+      {/* BLOCO 1: CAPA */}
       <div className="w-full h-80 md:h-96 relative bg-sky-600 overflow-hidden flex items-end justify-center shadow-md">
         <img 
           src={imagemCapaUrl} 
@@ -122,19 +121,23 @@ export default function TemplateToyStory({ slug, eventoData }) {
         </div>
       </div>
 
-      {/* CORPO DA HISTÓRIA (PÁGINA DE AVENTURAS) */}
+      {/* CORPO DA HISTÓRIA */}
       <div className="max-w-xl w-full relative z-10 px-4 pt-10 pb-16">
-        
-        {/* Woody Flutuando na Lateral Esquerda (Visível em Telas Médias/Grandes) */}
-        <div className="absolute -left-20 md:-left-36 top-32 z-20 hidden md:block pointer-events-none">
-          <img 
-            src={woodyUrl} 
-            alt="Xerife Woody" 
-            className="w-32 md:w-44 drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] transform -rotate-6"
-          />
-        </div>
-
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400 relative">
+
+          {/* PERSONAGEM WOODY INTEGRADO NO TOPO DO CARD (COM MIX-BLEND PARA SUMIR O FUNDO PRETO E ADAPTADO PARA MOBILE) */}
+          <div className="flex justify-between items-center mb-4 px-2">
+            <div className="w-24 md:w-32 transform -rotate-6">
+              <img 
+                src={woodyUrl} 
+                alt="Xerife Woody" 
+                className="w-full h-auto object-contain mix-blend-multiply drop-shadow-md"
+              />
+            </div>
+            <div className="text-right text-xs font-black text-sky-900 uppercase tracking-wider bg-amber-100 px-3 py-1 rounded-xl border border-amber-300">
+              📖 Edição Limitada
+            </div>
+          </div>
 
           {/* TÍTULO DO LIVRO DE AVENTURAS */}
           <div className="my-2 flex flex-col items-center">
@@ -148,7 +151,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
 
           <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
 
-          {/* ATO 1: BALÃO DE FALA DO WOODY (ESTILO HQ) */}
+          {/* ATO 1: BALÃO DE FALA DO WOODY */}
           <div className="relative bg-sky-100 border-4 border-sky-400 rounded-3xl p-5 mb-8 text-left shadow-md">
             <div className="absolute -top-4 left-8 bg-amber-400 text-sky-950 text-xs font-black px-3 py-1 rounded-full border-2 border-sky-500 uppercase">
               🤠 Mensagem do Xerife
@@ -158,7 +161,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </p>
           </div>
 
-          {/* CONTAGEM REGRESSIVA (PAINEL DE CONTROLE DO BUZZ) */}
+          {/* CONTAGEM REGRESSIVA */}
           <div className="mb-8">
             <h3 className="text-xs font-black text-red-600 uppercase tracking-widest mb-2">⏱️ Lançamento Foguete em:</h3>
             <div className="grid grid-cols-4 gap-2 bg-sky-950 text-white p-4 rounded-2xl border-2 border-amber-400 shadow-inner">
@@ -215,7 +218,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </a>
           </div>
 
-          {/* ATO 4: GALERIA DE FOTOS (ÁLBUM DE ADESIVOS) */}
+          {/* ATO 4: ÁLBUM DE FIGURINHAS */}
           <div className="mb-8 text-left bg-sky-50 p-4 rounded-2xl border-2 border-sky-300">
             <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide mb-3 text-center">📸 Álbum de Figurinhas do Herói</h3>
             <div className="grid grid-cols-3 gap-2">
@@ -231,7 +234,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           </div>
 
-          {/* FORMULÁRIO DE RSVP (CONFIRMAÇÃO DE MISSÃO) */}
+          {/* FORMULÁRIO DE RSVP */}
           <div className="bg-sky-100 p-6 rounded-2xl border-2 border-sky-300 mb-8 shadow-sm">
             <h2 className="text-xl font-black mb-3 text-sky-950">Vai participar da brincadeira?</h2>
             {enviado ? (
