@@ -273,8 +273,13 @@ export default function TemplateToyStory({ slug, eventoData }) {
               <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide mb-3 text-center">📸 Álbum de Figurinhas do Herói</h3>
               <div className="grid grid-cols-3 gap-2">
                 {fotosGaleria.map((url, index) => (
-                  <div key={index} className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1 hover:rotate-0 transition">
-                    <img src={url} alt={`Momento ${index + 1}`} className="rounded-lg object-cover h-24 w-full" />
+                  <div key={index} className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1 hover:rotate-0 transition h-24 flex items-center justify-center">
+                    <img 
+                      src={url} 
+                      alt={`Momento ${index + 1}`} 
+                      className="rounded-lg object-cover w-full h-full"
+                      onError={(e) => console.error("Erro ao carregar imagem da URL:", url)}
+                    />
                   </div>
                 ))}
               </div>
