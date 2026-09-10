@@ -9,7 +9,6 @@ export default function TemplateToyStory({ slug, eventoData }) {
   const [erro, setErro] = useState('');
   const [tempoRestante, setTempoRestante] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
 
-  // Data do evento (pode vir do banco ou ficar fixa como fallback)
   const dataEvento = evento?.data_evento ? new Date(evento.data_evento) : new Date('2027-01-17T15:00:00');
 
   useEffect(() => {
@@ -124,12 +123,20 @@ export default function TemplateToyStory({ slug, eventoData }) {
       <div className="max-w-xl w-full relative z-10 px-4 pt-10 pb-16">
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400">
 
-          {/* Cabeçalho */}
-          <span className="text-xs font-black tracking-widest text-red-600 uppercase bg-red-100 px-3 py-1 rounded-full border border-red-300">
-            Convite Oficial do Andy
-          </span>
-          <h1 className="text-4xl md:text-5xl font-black mt-4 mb-3 text-sky-950 tracking-tight">{evento.titulo}</h1>
-          <p className="text-slate-700 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
+          {/* TÍTULO ESTILO TOY STORY (ARTHUR / RAVI) */}
+          <div className="my-2 flex flex-col items-center">
+            {/* Nome grande amarelo com contorno pesado */}
+            <h1 className="text-5xl md:text-6xl font-black text-amber-300 uppercase tracking-wider drop-shadow-[0_4px_0_#1e3a8a] [-webkit-text-stroke:2px_#1e3a8a] transform -rotate-2">
+              {evento.titulo}
+            </h1>
+            
+            {/* Faixa vermelha com o subtítulo */}
+            <div className="bg-red-600 text-yellow-300 text-base md:text-lg font-black px-6 py-1.5 rounded-xl uppercase tracking-widest shadow-lg border-2 border-amber-300 transform rotate-1 -mt-2">
+              FAZ 1 ANO
+            </div>
+          </div>
+
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
 
           {/* Mensagem Temática */}
           <div className="bg-sky-50 p-4 rounded-2xl border-2 border-dashed border-sky-300 mb-6 text-sm text-sky-900 font-medium italic">
@@ -156,7 +163,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           </div>
 
-          {/* NOVA SEÇÃO: Mensagem dos Pais (Personalizável) */}
+          {/* Mensagem dos Pais */}
           <div className="mb-8 bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-300 text-left shadow-sm">
             <h3 className="text-xs font-black text-amber-800 uppercase tracking-wide mb-2">💌 Recado dos Pais</h3>
             <p className="text-slate-700 text-sm leading-relaxed font-medium">
@@ -188,16 +195,6 @@ export default function TemplateToyStory({ slug, eventoData }) {
             >
               Abrir no Google Maps 🚀
             </a>
-          </div>
-
-          {/* NOVA SEÇÃO: Mini Galeria de Fotos */}
-          <div className="mb-8 text-left">
-            <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide mb-3 text-center">📸 Momentos do Comandante</h3>
-            <div className="grid grid-cols-3 gap-2">
-              <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Foto 1" className="rounded-xl object-cover h-24 w-full border-2 border-sky-300 shadow" />
-              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=300&auto=format&fit=crop" alt="Foto 2" className="rounded-xl object-cover h-24 w-full border-2 border-sky-300 shadow" />
-              <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Foto 3" className="rounded-xl object-cover h-24 w-full border-2 border-sky-300 shadow" />
-            </div>
           </div>
 
           {/* Formulário de RSVP */}
