@@ -52,6 +52,7 @@ export default function VisualizadorConvite() {
     );
   }
 
+console.log(slug);
   // PAINEL DE DEBUG VISUAL (Se der erro ou não achar, mostra tudo na tela)
   if (erro || !evento) {
     return (
