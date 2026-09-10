@@ -37,31 +37,37 @@ export default function TemplateToyStory({ slug, eventoData }) {
     }
   }, [slug, evento]);
 
-  // Carregar fotos automaticamente do Supabase Storage com limite de 9 fotos
+  // Carregar fotos automaticamente do Supabase Storage corrigindo o caminho e filtrando lixo
   useEffect(() => {
     async function buscarFotosGaleria() {
-      // Defina o nome da pasta com base no slug ou em uma propriedade do evento (ex: 'ravi-um-aninho')
       const pastaBucket = evento?.pasta_storage || 'ravi-um-aninho';
 
       try {
         const { data, error } = await supabase.storage
           .from('Resources')
           .list(pastaBucket, {
-            limit: 9,
+            limit: 20, // Busca um pouco mais para garantir que pegue imagens após filtrar o lixo
             sortBy: { column: 'name', order: 'asc' }
           });
 
         if (error) throw error;
 
         if (data) {
-          // Filtra apenas arquivos de imagem e gera as URLs públicas ou assinadas
+          // Filtra arquivos válidos e remove placeholders de pastas vazias
           const urls = data
-            .filter(item => item.name && (item.name.endsWith('.jpg') || item.name.endsWith('.jpeg') || item.name.endsWith('.png')))
-            .slice(0, 9) // Garante o limite máximo de 9 fotos
+            .filter(item => {
+              if (!item.name || item.name.startsWith('.')) return false;
+              const nomeLower = item.name.toLowerCase();
+              return nomeLower.endsWith('.jpg') || nomeLower.endsWith('.jpeg') || nomeLower.endsWith('.png') || nomeLower.endsWith('.webp');
+            })
+            .slice(0, 9) // Limita a no máximo 9 fotos
             .map(item => {
+              // Monta o caminho completo correto: pasta/nome_do_arquivo
+              const caminhoCompleto = `${pastaBucket}/${item.name}`;
               const { data: publicUrlData } = supabase.storage
                 .from('Resources')
-                .getPublicUrl(`${pastaBucket}/${item.name}`);
+                .getPublicUrl(caminhoCompleto);
+                
               return publicUrlData.publicUrl;
             });
 
@@ -76,7 +82,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
       buscarFotosGaleria();
     }
   }, [evento]);
-
+  
   useEffect(() => {
     const timer = setInterval(() => {
       const agora = new Date();
