@@ -8,6 +8,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
   const [enviado, setEnviado] = useState(false);
   const [erro, setErro] = useState('');
   const [tempoRestante, setTempoRestante] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
+  
+  // Estado para armazenar as URLs das fotos da galeria dinamicamente
+  const [fotosGaleria, setFotosGaleria] = useState([]);
 
   const dataEvento = evento?.data_evento ? new Date(evento.data_evento) : new Date('2027-01-17T15:00:00');
 
@@ -33,6 +36,46 @@ export default function TemplateToyStory({ slug, eventoData }) {
       if (slug) carregarEvento();
     }
   }, [slug, evento]);
+
+  // Carregar fotos automaticamente do Supabase Storage com limite de 9 fotos
+  useEffect(() => {
+    async function buscarFotosGaleria() {
+      // Defina o nome da pasta com base no slug ou em uma propriedade do evento (ex: 'ravi-um-aninho')
+      const pastaBucket = evento?.pasta_storage || 'ravi-um-aninho';
+
+      try {
+        const { data, error } = await supabase.storage
+          .from('Resources')
+          .list(pastaBucket, {
+            limit: 9,
+            sortBy: { column: 'name', order: 'asc' }
+          });
+
+        if (error) throw error;
+
+        if (data) {
+          // Filtra apenas arquivos de imagem e gera as URLs públicas ou assinadas
+          const urls = data
+            .filter(item => item.name && (item.name.endsWith('.jpg') || item.name.endsWith('.jpeg') || item.name.endsWith('.png')))
+            .slice(0, 9) // Garante o limite máximo de 9 fotos
+            .map(item => {
+              const { data: publicUrlData } = supabase.storage
+                .from('Resources')
+                .getPublicUrl(`${pastaBucket}/${item.name}`);
+              return publicUrlData.publicUrl;
+            });
+
+          setFotosGaleria(urls);
+        }
+      } catch (err) {
+        console.error('Erro ao carregar galeria de fotos:', err);
+      }
+    }
+
+    if (evento) {
+      buscarFotosGaleria();
+    }
+  }, [evento]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -218,39 +261,19 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </a>
           </div>
 
-          {/* ATO 4: ÁLBUM DE FIGURINHAS */}
-          <div className="mb-8 text-left bg-sky-50 p-4 rounded-2xl border-2 border-sky-300">
-            <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide mb-3 text-center">📸 Álbum de Figurinhas do Herói</h3>
-            <div className="grid grid-cols-3 gap-2">
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
-              </div>
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
-              </div>
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
-              </div>
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
-              </div>
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
-              </div>
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
-              </div>
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
-              </div>
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
-              </div>
-              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
-                <img src="https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/ravi-um-aninho/IMG-20260907-WA0052.jpeg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvcmF2aS11bS1hbmluaG8vSU1HLTIwMjYwOTA3LVdBMDA1Mi5qcGVnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA2NjA0OCwiZXhwIjoxODIwNjAyMDQ4fQ.Hf5Ylw9M6mftC_GsritOdm56vBrFocqYOl7iu-8_9DQ" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+          {/* ATO 4: ÁLBUM DE FIGURINHAS DINÂMICO */}
+          {fotosGaleria.length > 0 && (
+            <div className="mb-8 text-left bg-sky-50 p-4 rounded-2xl border-2 border-sky-300">
+              <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide mb-3 text-center">📸 Álbum de Figurinhas do Herói</h3>
+              <div className="grid grid-cols-3 gap-2">
+                {fotosGaleria.map((url, index) => (
+                  <div key={index} className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1 hover:rotate-0 transition">
+                    <img src={url} alt={`Momento ${index + 1}`} className="rounded-lg object-cover h-24 w-full" />
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          )}
 
           {/* FORMULÁRIO DE RSVP */}
           <div className="bg-sky-100 p-6 rounded-2xl border-2 border-sky-300 mb-8 shadow-sm">
