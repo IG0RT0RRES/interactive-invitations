@@ -1,27 +1,25 @@
-# Ambiente virtual
-.venv/
-venv/
-ENV/
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Buildozer e Flet caches / builds locais
-.buildozer/
-build/
-bin/
-*.apk
-*.aab
+node_modules
+dist
+dist-ssr
+*.local
 
-# Python bytecode
-__pycache__/
-*.py[cod]
-
-# Configurações do PyCharm / IDEs
-.idea/
-.vscode/
-*.iml
-
-#arquivos de teste local
-cred_local.json
-historico_baixas.json
-app_prefs.json
-cred_ofs.json
-main.py
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
