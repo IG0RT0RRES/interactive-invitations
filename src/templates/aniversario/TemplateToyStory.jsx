@@ -9,9 +9,10 @@ export default function TemplateToyStory({ slug, eventoData }) {
   const [erro, setErro] = useState('');
   const [tempoRestante, setTempoRestante] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
   
-  // Estados para armazenar fotos e vídeos dinâmicos do storage
+  // Estados para armazenar fotos, vídeos e a foto de perfil dinâmica do storage
   const [fotosGaleria, setFotosGaleria] = useState([]);
   const [videosEvento, setVideosEvento] = useState([]);
+  const [fotoPerfilDinamica, setFotoPerfilDinamica] = useState('');
 
   const dataEvento = evento?.data_evento ? new Date(evento.data_evento) : new Date('2027-01-17T15:00:00');
 
@@ -48,14 +49,38 @@ export default function TemplateToyStory({ slug, eventoData }) {
     }
   }, [slug, evento]);
 
-  // Carregar fotos e vídeos automaticamente do Supabase Storage
+  // Carregar fotos de perfil, galeria e vídeos automaticamente do Supabase Storage
   useEffect(() => {
     async function buscarMidiasStorage() {
       const pastaBucket = evento?.pasta_storage || 'ravi-um-aninho';
+      const caminhoProfile = `${pastaBucket}/profile`;
       const caminhoGaleria = `${pastaBucket}/galeria`;
       const caminhoVideos = `${pastaBucket}/videos`;
 
       try {
+        // 0. Buscar foto de perfil na pasta 'profile'
+        const { data: dadosProfile, error: erroProfile } = await supabase.storage
+          .from('Resources')
+          .list(caminhoProfile, {
+            limit: 5,
+            sortBy: { column: 'name', order: 'asc' }
+          });
+
+        if (!erroProfile && dadosProfile && dadosProfile.length > 0) {
+          const arquivoPerfil = dadosProfile.find(item => {
+            if (!item.name || item.name.startsWith('.')) return false;
+            const ext = item.name.toLowerCase();
+            return ext.endsWith('.jpg') || ext.endsWith('.jpeg') || ext.endsWith('.png') || ext.endsWith('.webp');
+          });
+
+          if (arquivoPerfil) {
+            const { data: publicUrlData } = supabase.storage
+              .from('Resources')
+              .getPublicUrl(`${caminhoProfile}/${arquivoPerfil.name}`);
+            setFotoPerfilDinamica(publicUrlData.publicUrl);
+          }
+        }
+
         // 1. Buscar fotos da galeria
         const { data: dadosFotos, error: erroFotos } = await supabase.storage
           .from('Resources')
@@ -170,7 +195,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
   }
 
   const imagemCapaUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/public/Resources/Toy-story/Capa_Toy_Story/CAPA_TOY_STORY.png";
-  const fotoAniversarianteUrl = evento.foto_url || "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop";
+  
+  // Prioriza a foto encontrada na pasta 'profile', depois a do banco (evento.foto_url) e por fim um placeholder
+  const fotoAniversarianteUrl = fotoPerfilDinamica || "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop";
   
   const woodyUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/Toy-story/IMG-20260910-WA0013.jpg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvVG95LXN0b3J5L0lNRy0yMDI2MDkxMC1XQTAwMTMuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA1ODU4NSwiZXhwIjo0OTQyNjU4NTg1fQ.HlS9z1vvmOjnInRbYvLwhYrmFcoyOE0jpqDn77QrKMY";
   const buzzUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/public/Resources/Toy-story/difarac-169f36df-27f4-42cd-98f7-5982f89b8668-removebg-preview.png"; 
@@ -190,7 +217,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-sky-950/90 via-sky-900/40 to-transparent"></div>
 
-        {/* Foto do Aniversariante Flutuando */}
+        {/* Foto do Aniversariante Flutuando (Dinâmica da pasta profile) */}
         <div className="relative z-10 -mb-6 flex flex-col items-center">
           <div className="w-40 h-40 md:w-48 md:h-48 rounded-full p-2 bg-gradient-to-tr from-amber-400 via-red-500 to-yellow-300 shadow-2xl">
             <img 
@@ -276,7 +303,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </p>
           </div>
 
-          {/* VÍDEOS DINÂMICOS DO STORAGE (Renderiza se houver vídeos na pasta /videos) */}
+          {/* VÍDEOS DINÂMICOS DO STORAGE */}
           {videosEvento.length > 0 && (
             <div className="mb-8 flex flex-col gap-4">
               <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide text-center">🎬 Vídeos da Aventura</h3>
