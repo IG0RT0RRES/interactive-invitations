@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // ou o seu roteador atual
-import { supabase } from '../services/supabaseClient';
+import { supabase } from './services/supabaseClient';
 
 // Importa os templates disponíveis
 import TemplateAniversario1 from './templates/aniversario/TemplateAniversario1';
