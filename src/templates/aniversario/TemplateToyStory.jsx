@@ -10,7 +10,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
   const [erro, setErro] = useState('');
   const [tempoRestante, setTempoRestante] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
 
-  const dataEvento = new Date('2026-10-15T15:00:00');
+  const dataEvento = new Date('2027-01-17T15:00:00');
 
   useEffect(() => {
     if (!evento) {
