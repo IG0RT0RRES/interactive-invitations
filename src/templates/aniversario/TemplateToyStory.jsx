@@ -52,7 +52,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
   // Carregar fotos de perfil, galeria e vídeos automaticamente do Supabase Storage
   useEffect(() => {
     async function buscarMidiasStorage() {
-      const pastaBucket = evento?.pasta_storage || 'ravi-um-aninho';
+      const pastaBucket = evento?.pasta_storage || 'aniversario-um-ano';
       const caminhoProfile = `${pastaBucket}/profile`;
       const caminhoGaleria = `${pastaBucket}/galeria`;
       const caminhoVideos = `${pastaBucket}/videos`;
