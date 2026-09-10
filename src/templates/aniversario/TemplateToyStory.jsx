@@ -50,7 +50,6 @@ export default function TemplateToyStory({ slug, eventoData }) {
   // Carregar fotos automaticamente do Supabase Storage considerando a subpasta 'galeria'
   useEffect(() => {
     async function buscarFotosGaleria() {
-      // Define o caminho completo até a pasta de fotos
       const pastaBucket = evento?.pasta_storage || 'ravi-um-aninho';
       const caminhoGaleria = `${pastaBucket}/galeria`;
 
@@ -73,7 +72,6 @@ export default function TemplateToyStory({ slug, eventoData }) {
             })
             .slice(0, 9)
             .map(item => {
-              // Monta a URL pública apontando para a subpasta galeria
               const caminhoCompleto = `${caminhoGaleria}/${item.name}`;
               const { data: publicUrlData } = supabase.storage
                 .from('Resources')
@@ -149,7 +147,10 @@ export default function TemplateToyStory({ slug, eventoData }) {
   const imagemCapaUrl = evento.capa_url || "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop";
   const fotoAniversarianteUrl = evento.foto_url || "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop";
   
-  const woodyUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/public/Resources/Toy-story/Wood-removebg-preview.png";
+  const woodyUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/sign/Resources/Toy-story/IMG-20260910-WA0013.jpg?token=eyJraWQiOiI0NDM2Mzc4NC03YzMxLTQ5ODctYTUxNi1jZmQwZTE3YjUzN2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJSZXNvdXJjZXMvVG95LXN0b3J5L0lNRy0yMDI2MDkxMC1XQTAwMTMuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTA1ODU4NSwiZXhwIjo0OTQyNjU4NTg1fQ.HlS9z1vvmOjnInRbYvLwhYrmFcoyOE0jpqDn77QrKMY";
+
+  // Altere para a URL correta da imagem do Buzz após subir para o Supabase
+  const buzzUrl = "https://ohvuepigcgrfqscuscyb.supabase.co/storage/v1/object/public/Resources/Toy-story/difarac-169f36df-27f4-42cd-98f7-5982f89b8668-removebg-preview.png"; 
 
   return (
     <div className="min-h-screen bg-sky-500 text-slate-900 flex flex-col items-center relative overflow-x-hidden">
@@ -322,6 +323,20 @@ export default function TemplateToyStory({ slug, eventoData }) {
                 </button>
               </form>
             )}
+          </div>
+
+          {/* FIGURINHA DO BUZZ LIGHTYEAR (ANTES DO PIX) */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-slate-900 p-3 rounded-2xl shadow-lg border-2 border-purple-500 transform rotate-2 w-36 md:w-44 flex flex-col items-center">
+              <img 
+                src={buzzUrl} 
+                alt="Buzz Lightyear" 
+                className="w-full h-36 object-contain mix-blend-screen filter contrast-125"
+              />
+              <span className="block text-[10px] font-black text-green-400 uppercase mt-2 tracking-widest">
+                Buzz Lightyear 🚀
+              </span>
+            </div>
           </div>
 
           {/* CAIXA DE TESOUROS (PIX) */}
