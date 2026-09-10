@@ -157,13 +157,13 @@ export default function TemplateToyStory({ slug, eventoData }) {
               🤠 Mensagem do Xerife
             </div>
             <p className="text-sky-950 font-bold text-sm md:text-base mt-2 italic">
-              "Você tem um amigo em mim! O nosso comandante mirim completou 1 aninho de pura alegria e a nossa caixa de brinquedos inteira está convocada para essa missão épica!"
+              "Você é um amigo(a) e está convidado ! O nosso xerife mirim irá completar 1 aninho de pura alegria e a nossa caixa de brinquedos inteira está convocada para essa missão épica!"
             </p>
           </div>
 
           {/* CONTAGEM REGRESSIVA */}
           <div className="mb-8">
-            <h3 className="text-xs font-black text-red-600 uppercase tracking-widest mb-2">⏱️ Lançamento Foguete em:</h3>
+            <h3 className="text-xs font-black text-red-600 uppercase tracking-widest mb-2">⏱️ Lançamento do Foguete em:</h3>
             <div className="grid grid-cols-4 gap-2 bg-sky-950 text-white p-4 rounded-2xl border-2 border-amber-400 shadow-inner">
               <div className="flex flex-col items-center">
                 <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.dias}</span>
