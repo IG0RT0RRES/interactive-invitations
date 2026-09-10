@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../../services/supabaseClient';
 
 export default function TemplateToyStory({ slug, eventoData }) {
-  // Se eventoData já vier pronto do roteador dinâmico, ótimo. Se não, busca direto.
   const [evento, setEvento] = useState(eventoData || null);
   const [loading, setLoading] = useState(!eventoData);
   const [nomeConvidado, setNomeConvidado] = useState('');
@@ -10,7 +9,8 @@ export default function TemplateToyStory({ slug, eventoData }) {
   const [erro, setErro] = useState('');
   const [tempoRestante, setTempoRestante] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
 
-  const dataEvento = new Date('2027-01-17T15:00:00');
+  // Data do evento (pode vir do banco ou ficar fixa como fallback)
+  const dataEvento = evento?.data_evento ? new Date(evento.data_evento) : new Date('2027-01-17T15:00:00');
 
   useEffect(() => {
     if (!evento) {
@@ -52,7 +52,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [dataEvento]);
 
   const handleRSVP = async (e) => {
     e.preventDefault();
@@ -87,17 +87,16 @@ export default function TemplateToyStory({ slug, eventoData }) {
     );
   }
 
-  // Imagens temáticas padrão de Toy Story (céu com nuvens)
   const imagemCapaUrl = evento.capa_url || "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop";
   const fotoAniversarianteUrl = evento.foto_url || "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop";
 
   return (
     <div className="min-h-screen bg-sky-500 text-slate-900 flex flex-col items-center relative overflow-hidden">
-      
-      {/* Efeito visual de nuvens no fundo (estilo Toy Story) */}
+
+      {/* Efeito visual de nuvens no fundo */}
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#fff_2px,transparent_2px)] [background-size:24px_24px]"></div>
 
-      {/* Bloco da Capa Estilo Toy Story */}
+      {/* Bloco da Capa */}
       <div className="w-full h-80 md:h-96 relative bg-sky-600 overflow-hidden flex items-end justify-center shadow-md">
         <img 
           src={imagemCapaUrl} 
@@ -106,7 +105,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-sky-950/80 via-sky-900/30 to-transparent"></div>
 
-        {/* Foto do Aniversariante Flutuando em Destaque */}
+        {/* Foto do Aniversariante Flutuando */}
         <div className="relative z-10 -mb-6 flex flex-col items-center">
           <div className="w-40 h-40 md:w-48 md:h-48 rounded-full p-2 bg-gradient-to-tr from-amber-400 via-red-500 to-yellow-300 shadow-2xl">
             <img 
@@ -124,7 +123,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
       {/* Card Principal de Conteúdo */}
       <div className="max-w-xl w-full relative z-10 px-4 pt-10 pb-16">
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400">
-          
+
           {/* Cabeçalho */}
           <span className="text-xs font-black tracking-widest text-red-600 uppercase bg-red-100 px-3 py-1 rounded-full border border-red-300">
             Convite Oficial do Andy
@@ -137,7 +136,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
             "Você tem um amigo em mim! Venha comemorar conosco essa grande aventura de 1 aninho!"
           </div>
 
-          {/* Contagem Regressiva Estilo Alvo/Brinquedo */}
+          {/* Contagem Regressiva */}
           <div className="grid grid-cols-4 gap-2 mb-8 bg-sky-950 text-white p-4 rounded-2xl border-2 border-amber-400 shadow-inner">
             <div className="flex flex-col items-center">
               <span className="text-2xl md:text-3xl font-black text-amber-400">{tempoRestante.dias}</span>
@@ -157,6 +156,14 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           </div>
 
+          {/* NOVA SEÇÃO: Mensagem dos Pais (Personalizável) */}
+          <div className="mb-8 bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-300 text-left shadow-sm">
+            <h3 className="text-xs font-black text-amber-800 uppercase tracking-wide mb-2">💌 Recado dos Pais</h3>
+            <p className="text-slate-700 text-sm leading-relaxed font-medium">
+              "Estamos preparando tudo com muito amor e carinho para celebrar o primeiro ano do nosso pequeno herói junto com as pessoas mais especiais das nossas vidas. Preparem suas fantasias e venham se divertir!"
+            </p>
+          </div>
+
           {/* Bloco de Vídeo */}
           {evento.video_url && (
             <div className="mb-8 rounded-2xl overflow-hidden shadow-lg aspect-video bg-black border-2 border-sky-400 flex items-center justify-center">
@@ -170,7 +177,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
           )}
 
           {/* Localização da Festa */}
-          <div className="mb-8 bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-left">
+          <div className="mb-8 bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-left shadow-sm">
             <h3 className="text-xs font-black text-red-600 uppercase tracking-wide mb-1">📍 Local da Missão</h3>
             <p className="text-slate-800 font-bold mb-3">Salão de Festas Quarto do Andy - Rua dos Brinquedos, 1995</p>
             <a 
@@ -183,8 +190,18 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </a>
           </div>
 
+          {/* NOVA SEÇÃO: Mini Galeria de Fotos */}
+          <div className="mb-8 text-left">
+            <h3 className="text-xs font-black text-sky-900 uppercase tracking-wide mb-3 text-center">📸 Momentos do Comandante</h3>
+            <div className="grid grid-cols-3 gap-2">
+              <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Foto 1" className="rounded-xl object-cover h-24 w-full border-2 border-sky-300 shadow" />
+              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=300&auto=format&fit=crop" alt="Foto 2" className="rounded-xl object-cover h-24 w-full border-2 border-sky-300 shadow" />
+              <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Foto 3" className="rounded-xl object-cover h-24 w-full border-2 border-sky-300 shadow" />
+            </div>
+          </div>
+
           {/* Formulário de RSVP */}
-          <div className="bg-sky-100 p-6 rounded-2xl border-2 border-sky-300 mb-8">
+          <div className="bg-sky-100 p-6 rounded-2xl border-2 border-sky-300 mb-8 shadow-sm">
             <h2 className="text-xl font-black mb-3 text-sky-950">Vai participar da brincadeira?</h2>
             {enviado ? (
               <div className="text-emerald-700 font-bold py-3 bg-emerald-100 rounded-xl border border-emerald-400">
