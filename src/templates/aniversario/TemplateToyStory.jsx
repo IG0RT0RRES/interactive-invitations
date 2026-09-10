@@ -229,6 +229,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
           <span className="mt-3 bg-amber-400 text-sky-950 text-xs md:text-sm font-black px-5 py-1.5 rounded-full shadow-lg border-2 border-red-500 uppercase tracking-widest">
             ⭐ Ao Infinito e Além! ⭐
           </span>
+
         </div>
       </div>
 
@@ -365,7 +366,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
           </div>
 
           {/* FIGURINHA DO BUZZ */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-8 mt-8">
             <div className="bg-slate-900 p-3 rounded-2xl shadow-lg border-2 border-purple-500 transform rotate-2 w-36 md:w-44 flex flex-col items-center">
               <img 
                 src={buzzUrl} 
@@ -380,7 +381,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
 
           {/* CAIXA DE TESOUROS (PIX) */}
           {evento.chave_pix && (
-            <div className="border-t-2 border-slate-200 pt-6">
+            <div className="border-t-2 border-slate-200 pt-6 mt-6">
               <h2 className="text-lg font-black mb-2 text-sky-950">Caixa de Tesouros (Pix)</h2>
               <p className="text-xs text-slate-600 mb-3 font-medium">Deseja enviar uma lembrança para o aniversariante? Use a chave Pix:</p>
               <div className="bg-sky-950 p-3.5 rounded-xl font-mono text-sm text-amber-300 select-all border border-amber-400 font-bold">
@@ -391,14 +392,21 @@ export default function TemplateToyStory({ slug, eventoData }) {
           
           {/* LOCALIZAÇÃO */}
           {evento.local_endereco && (
-          <div className="mb-8 bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-left shadow-sm">
-            <h3 className="text-xs font-black text-red-600 uppercase tracking-wide mb-1">📍 Coordenadas da Base (Local)</h3>
-            <p className="text-slate-800 font-bold mb-1">{evento.local_nome || "Local da Festa"}</p>
-            <p className="text-slate-600 text-sm mb-3">{evento.local_endereco}</p>
-            <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(evento.local_endereco)}`} target="_blank" rel="noopener noreferrer" className="inline-block text-xs font-bold bg-amber-400 hover:bg-amber-500 text-sky-950 px-4 py-2 rounded-xl shadow transition">
-            Abrir no Google Maps 🚀
-            </a>
-          </div>)}
+            <div className="mt-8 bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-left shadow-sm">
+              <h3 className="text-xs font-black text-red-600 uppercase tracking-wide mb-1">📍 Coordenadas da Base (Local)</h3>
+              <p className="text-slate-800 font-bold mb-1">{evento.local_nome || "Local da Festa"}</p>
+              <p className="text-slate-600 text-sm mb-3">{evento.local_endereco}</p>
+              <a 
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(evento.local_endereco)}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-block text-xs font-bold bg-amber-400 hover:bg-amber-500 text-sky-950 px-4 py-2 rounded-xl shadow transition"
+              >
+                Abrir no Google Maps 🚀
+              </a>
+            </div>
+          )}
+
         </div>
       </div>
     </div>
