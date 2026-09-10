@@ -125,17 +125,17 @@ export default function TemplateToyStory({ slug, eventoData }) {
       <div className="max-w-xl w-full relative z-10 px-4 pt-10 pb-16">
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400 relative">
 
-          {/* PERSONAGEM WOODY INTEGRADO NO TOPO DO CARD (COM MIX-BLEND PARA SUMIR O FUNDO PRETO E ADAPTADO PARA MOBILE) */}
-          <div className="flex justify-between items-center mb-4 px-2">
-            <div className="w-24 md:w-32 transform -rotate-6">
+          {/* FIGURINHA DO WOODY EMOLDURADA (ESTILO POLAROID/SELO) */}
+          <div className="flex justify-center mb-6">
+            <div className="bg-white p-3 rounded-2xl shadow-lg border-2 border-amber-400 transform -rotate-2 w-32 md:w-40">
               <img 
                 src={woodyUrl} 
                 alt="Xerife Woody" 
-                className="w-full h-auto object-contain mix-blend-multiply drop-shadow-md"
+                className="w-full h-36 object-cover rounded-xl"
               />
-            </div>
-            <div className="text-right text-xs font-black text-sky-900 uppercase tracking-wider bg-amber-100 px-3 py-1 rounded-xl border border-amber-300">
-              📖 Edição Limitada
+              <span className="block text-[10px] font-black text-sky-900 uppercase mt-2 tracking-widest">
+                Xerife Woody 🤠
+              </span>
             </div>
           </div>
 
@@ -151,7 +151,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
 
           <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
 
-          {/* ATO 1: BALÃO DE FALA DO WOODY */}
+          {/* ATO 1: BALÃO DE FALA */}
           <div className="relative bg-sky-100 border-4 border-sky-400 rounded-3xl p-5 mb-8 text-left shadow-md">
             <div className="absolute -top-4 left-8 bg-amber-400 text-sky-950 text-xs font-black px-3 py-1 rounded-full border-2 border-sky-500 uppercase">
               🤠 Mensagem do Xerife
