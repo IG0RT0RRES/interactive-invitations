@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { supabase } from './services/supabaseClient';
 
 // Importe os dois templates
-import TemplateAniversario1 from './TemplateAniversario1';
-import TemplateToyStory from './TemplateToyStory';
+import TemplateAniversario1 from './template/aniversario/TemplateAniversario1';
+import TemplateToyStory from './template/aniversario/TemplateToyStory';
 
 export default function VisualizadorConvite() {
   const { slug } = useParams();
