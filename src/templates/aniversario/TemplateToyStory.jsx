@@ -125,15 +125,15 @@ export default function TemplateToyStory({ slug, eventoData }) {
       <div className="max-w-xl w-full relative z-10 px-4 pt-10 pb-16">
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400 relative">
 
-          {/* FIGURINHA DO WOODY EMOLDURADA (ESTILO POLAROID/SELO) */}
+          {/* FIGURINHA DO WOODY COM TRATAMENTO DE COR PARA SUMIR O FUNDO PRETO */}
           <div className="flex justify-center mb-6">
-            <div className="bg-white p-3 rounded-2xl shadow-lg border-2 border-amber-400 transform -rotate-2 w-32 md:w-40">
+            <div className="bg-sky-950 p-3 rounded-2xl shadow-lg border-2 border-amber-400 transform -rotate-2 w-36 md:w-44 flex flex-col items-center">
               <img 
                 src={woodyUrl} 
                 alt="Xerife Woody" 
-                className="w-full h-36 object-cover rounded-xl"
+                className="w-full h-36 object-contain mix-blend-screen filter contrast-125"
               />
-              <span className="block text-[10px] font-black text-sky-900 uppercase mt-2 tracking-widest">
+              <span className="block text-[10px] font-black text-amber-300 uppercase mt-2 tracking-widest">
                 Xerife Woody 🤠
               </span>
             </div>
