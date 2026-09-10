@@ -16,10 +16,10 @@ export default function VisualizadorConvite() {
     async function carregarEvento() {
       try {
         const { data, error } = await supabase
-          .from('eventos')
-          .select('*')
-          .eq('slug', slug)
-          .single();
+  .from('eventos')
+  .select('*')
+  .ilike('slug', slug) // .ilike ignora diferença entre maiúsculas e minúsculas
+  .single();
 
         if (error) throw error;
         setEvento(data);
