@@ -318,25 +318,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
               ))}
             </div>
           )}
-
-          {/* LOCALIZAÇÃO */}
-{evento.local_endereco && (
-  <div className="mb-8 bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-left shadow-sm">
-    <h3 className="text-xs font-black text-red-600 uppercase tracking-wide mb-1">📍 Coordenadas da Base (Local)</h3>
-    <p className="text-slate-800 font-bold mb-1">{evento.local_nome || "Local da Festa"}</p>
-    <p className="text-slate-600 text-sm mb-3">{evento.local_endereco}</p>
-    
-    <a 
-      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(evento.local_endereco)}`} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="inline-block text-xs font-bold bg-amber-400 hover:bg-amber-500 text-sky-950 px-4 py-2 rounded-xl shadow transition"
-    >
-      Abrir no Google Maps 🚀
-    </a>
-  </div>
-)}
-
+          
           {/* ÁLBUM DE FIGURINHAS (FOTOS) */}
           {fotosGaleria.length > 0 && (
             <div className="mb-8 text-left bg-sky-50 p-4 rounded-2xl border-2 border-sky-300">
@@ -406,7 +388,17 @@ export default function TemplateToyStory({ slug, eventoData }) {
               </div>
             </div>
           )}
-
+          
+          {/* LOCALIZAÇÃO */}
+          {evento.local_endereco && (
+          <div className="mb-8 bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-left shadow-sm">
+            <h3 className="text-xs font-black text-red-600 uppercase tracking-wide mb-1">📍 Coordenadas da Base (Local)</h3>
+            <p className="text-slate-800 font-bold mb-1">{evento.local_nome || "Local da Festa"}</p>
+            <p className="text-slate-600 text-sm mb-3">{evento.local_endereco}</p>
+            <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(evento.local_endereco)}`} target="_blank" rel="noopener noreferrer" className="inline-block text-xs font-bold bg-amber-400 hover:bg-amber-500 text-sky-950 px-4 py-2 rounded-xl shadow transition">
+            Abrir no Google Maps 🚀
+            </a>
+          </div>)}
         </div>
       </div>
     </div>
