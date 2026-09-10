@@ -231,6 +231,18 @@ export default function TemplateToyStory({ slug, eventoData }) {
               <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
                 <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
               </div>
+              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+              </div>
+              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+              </div>
+              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+              </div>
+              <div className="relative group overflow-hidden rounded-xl border-2 border-white shadow bg-white p-1 transform -rotate-1">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=300&auto=format&fit=crop" alt="Momento 3" className="rounded-lg object-cover h-24 w-full" />
+              </div>
             </div>
           </div>
 
