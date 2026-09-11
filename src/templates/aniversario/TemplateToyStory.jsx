@@ -328,7 +328,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           )}
 
-          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">
+            Nosso xerife favorito cresceu rápido! Vamos celebrar seu primeiro aniversário com muita diversão.
+          </p>
           
           {/* ÁLBUM DE FIGURINHAS (FOTOS) */}
           {fotosGaleria.length > 0 && (
