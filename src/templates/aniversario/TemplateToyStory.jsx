@@ -273,7 +273,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </p>
           </div>
           
-          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">
+            O Conselho dos Brinquedos convoca todos os amigos para a celebração do 1º ano do xerife Ravi
+          </p>
           
           {/* CONTAGEM REGRESSIVA */}
           <div className="mb-8">
@@ -298,7 +300,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           </div>
 
-          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">
+              Embarque nesta aventura! O espaço está reservado para você na primeira festa do Ravi.
+          </p>
 
           {/* DIÁRIO DOS PAIS */}
           <div className="mb-8 bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-300 text-left shadow-sm">
