@@ -389,7 +389,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           </div>
 
-          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{"O primeiro ano passou voando... Ao infinito e além! Feliz 1 aninho, meu patrulheiro espacial!" 🚀}</p>
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">
+            O primeiro ano passou voando... Ao infinito e além! Feliz 1 aninho, meu patrulheiro espacial! 🚀
+          </p>
           
           {/* CAIXA DE TESOUROS (PIX) */}
           {evento.chave_pix && (
