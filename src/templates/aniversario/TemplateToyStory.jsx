@@ -236,7 +236,17 @@ export default function TemplateToyStory({ slug, eventoData }) {
       {/* CORPO DA HISTÓRIA */}
       <div className="max-w-xl w-full relative z-10 px-4 pt-10 pb-16">
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 text-center border-4 border-amber-400 relative">
-
+          
+          {/* TÍTULO */}
+          <div className="my-2 flex flex-col items-center">
+            <h1 className="text-5xl md:text-6xl font-black text-amber-300 uppercase tracking-wider drop-shadow-[0_4px_0_#1e3a8a] [-webkit-text-stroke:2px_#1e3a8a] transform -rotate-2">
+              {evento.titulo}
+            </h1>
+            <div className="bg-red-600 text-yellow-300 text-base md:text-lg font-black px-6 py-1.5 rounded-xl uppercase tracking-widest shadow-lg border-2 border-amber-300 transform rotate-1 mt-3">
+              FAZ 1 ANO
+            </div>
+          </div>
+          
           {/* FIGURINHA DO WOODY */}
           <div className="flex justify-center mb-6">
             <div className="bg-sky-950 p-3 rounded-2xl shadow-lg border-2 border-amber-400 transform -rotate-2 w-36 md:w-44 flex flex-col items-center">
@@ -250,17 +260,7 @@ export default function TemplateToyStory({ slug, eventoData }) {
               </span>
             </div>
           </div>
-
-          {/* TÍTULO */}
-          <div className="my-2 flex flex-col items-center">
-            <h1 className="text-5xl md:text-6xl font-black text-amber-300 uppercase tracking-wider drop-shadow-[0_4px_0_#1e3a8a] [-webkit-text-stroke:2px_#1e3a8a] transform -rotate-2">
-              {evento.titulo}
-            </h1>
-            <div className="bg-red-600 text-yellow-300 text-base md:text-lg font-black px-6 py-1.5 rounded-xl uppercase tracking-widest shadow-lg border-2 border-amber-300 transform rotate-1 mt-3">
-              FAZ 1 ANO
-            </div>
-          </div>
-
+          
           <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
 
           {/* MENSAGEM */}
@@ -272,7 +272,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
               "Você é um amigo(a) e está convidado ! O nosso xerife mirim irá completar 1 aninho de pura alegria e a nossa caixa de brinquedos inteira está convocada para essa missão épica!"
             </p>
           </div>
-
+          
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
+          
           {/* CONTAGEM REGRESSIVA */}
           <div className="mb-8">
             <h3 className="text-xs font-black text-red-600 uppercase tracking-widest mb-2">⏱️ Lançamento do Foguete em:</h3>
@@ -295,6 +297,8 @@ export default function TemplateToyStory({ slug, eventoData }) {
               </div>
             </div>
           </div>
+
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
 
           {/* DIÁRIO DOS PAIS */}
           <div className="mb-8 bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-300 text-left shadow-sm">
@@ -319,6 +323,8 @@ export default function TemplateToyStory({ slug, eventoData }) {
               ))}
             </div>
           )}
+
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
           
           {/* ÁLBUM DE FIGURINHAS (FOTOS) */}
           {fotosGaleria.length > 0 && (
@@ -337,6 +343,8 @@ export default function TemplateToyStory({ slug, eventoData }) {
               </div>
             </div>
           )}
+
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
 
           {/* RSVP */}
           <div className="bg-sky-100 p-6 rounded-2xl border-2 border-sky-300 mb-8 shadow-sm">
@@ -365,6 +373,8 @@ export default function TemplateToyStory({ slug, eventoData }) {
             )}
           </div>
 
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
+          
           {/* FIGURINHA DO BUZZ */}
           <div className="flex justify-center mb-8 mt-8">
             <div className="bg-slate-900 p-3 rounded-2xl shadow-lg border-2 border-purple-500 transform rotate-2 w-36 md:w-44 flex flex-col items-center">
@@ -379,6 +389,8 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           </div>
 
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
+          
           {/* CAIXA DE TESOUROS (PIX) */}
           {evento.chave_pix && (
             <div className="border-t-2 border-slate-200 pt-6 mt-6">
@@ -389,6 +401,8 @@ export default function TemplateToyStory({ slug, eventoData }) {
               </div>
             </div>
           )}
+
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
           
           {/* LOCALIZAÇÃO */}
           {evento.local_endereco && (
@@ -406,6 +420,8 @@ export default function TemplateToyStory({ slug, eventoData }) {
               </a>
             </div>
           )}
+
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
 
         </div>
       </div>
