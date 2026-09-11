@@ -350,7 +350,9 @@ export default function TemplateToyStory({ slug, eventoData }) {
             </div>
           )}
 
-          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
+          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">
+            Cada sorriso do Ravi neste primeiro ano foi a nossa maior recompensa. Venham celebrar essa alegria com a nossa família!
+          </p>
 
           {/* RSVP */}
           <div className="bg-sky-100 p-6 rounded-2xl border-2 border-sky-300 mb-8 shadow-sm">
@@ -379,7 +381,6 @@ export default function TemplateToyStory({ slug, eventoData }) {
             )}
           </div>
 
-          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
           
           {/* FIGURINHA DO BUZZ */}
           <div className="flex justify-center mb-8 mt-8">
@@ -409,8 +410,6 @@ export default function TemplateToyStory({ slug, eventoData }) {
               </div>
             </div>
           )}
-
-          <p className="text-slate-700 mt-6 mb-6 text-base md:text-lg font-medium leading-relaxed">{evento.descricao}</p>
           
           {/* LOCALIZAÇÃO */}
           {evento.local_endereco && (
